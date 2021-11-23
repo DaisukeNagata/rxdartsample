@@ -35,7 +35,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  int count = 0;
   var subject = PublishSubject<int>();
   var productListModel = ProductListModel();
 
@@ -45,8 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       subject.listen((data) {
         _counter = data;
       });
-      count = count += 1;
-      productListModel.add(count);
+
+      productListModel.add(_counter + 1);
       // 発行
       subject.add(productListModel.products.last.count);
     });
@@ -55,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void reset() {
     setState(() {
       subject.add(0);
-      count = 0;
       productListModel.products = [];
     });
   }
