@@ -1,19 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
-
-class CountModel {
-  int count;
-
-  CountModel(this.count);
-}
-
-class ProductListModel {
-  List<CountModel> products = [];
-
-  void add(int index) {
-    products.add(CountModel(index));
-  }
-}
+import 'counter_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,71 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  var subject = PublishSubject<int>();
-  var productListModel = ProductListModel();
-
-  void _incrementCounter() {
-    setState(() {
-      // 購読
-      subject.listen((data) {
-        _counter = data;
-      });
-
-      productListModel.add(_counter + 1);
-      // 発行
-      subject.add(productListModel.products.last.count);
-    });
-  }
-
-  void reset() {
-    setState(() {
-      subject.add(0);
-      productListModel.products = [];
-    });
-  }
-
-  @override
-  void dispose() {
-    subject.close();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          '$_counter',
-          style: Theme.of(context).textTheme.headline4,
-        ),
-      ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(left: 30.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: reset,
-              child: Icon(Icons.close),
-            ),
-            FloatingActionButton(
-              onPressed: _incrementCounter,
-              child: Icon(Icons.add),
-            ),
-          ],
-        ),
-      ),
+      home: CounterPage(),
     );
   }
 }
