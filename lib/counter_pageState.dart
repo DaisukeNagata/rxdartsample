@@ -7,7 +7,7 @@ import 'counter_model.dart';
 class CounterPageState extends State<CounterPage> {
   int _counter = 0;
   var subject = PublishSubject<int>();
-  var productListModel = CounterListModel();
+  var counterListModel = CounterListModel();
 
   void incrementCounter() {
     setState(() {
@@ -16,16 +16,16 @@ class CounterPageState extends State<CounterPage> {
         _counter = data;
       });
 
-      productListModel.add(_counter + 1);
+      counterListModel.add(_counter + 1);
       // 発行
-      subject.add(productListModel.products.last.count);
+      subject.add(counterListModel.products.last.count);
     });
   }
 
   void reset() {
     setState(() {
       subject.add(0);
-      productListModel.products = [];
+      counterListModel.products = [];
     });
   }
 
