@@ -69,24 +69,24 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Text(
           '$_counter',
-          style: Theme
-              .of(context)
-              .textTheme
-              .headline4,
+          style: Theme.of(context).textTheme.headline4,
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            child: Icon(Icons.add),
-          ),
-          FloatingActionButton(
-            onPressed: reset,
-            child: Icon(Icons.close),
-          ),
-        ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 30.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            FloatingActionButton(
+              onPressed: reset,
+              child: Icon(Icons.close),
+            ),
+            FloatingActionButton(
+              onPressed: _incrementCounter,
+              child: Icon(Icons.add),
+            ),
+          ],
+        ),
       ),
     );
   }
